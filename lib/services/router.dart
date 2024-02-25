@@ -5,6 +5,7 @@ import 'package:starter_kit/screens/onboarding/login_screen.dart';
 import 'package:starter_kit/screens/onboarding/register_screen.dart';
 import 'package:starter_kit/screens/profile/change_password_screen.dart';
 import 'package:starter_kit/screens/profile/profile_screen.dart';
+import 'package:starter_kit/widgets/bottom_navigation_bar.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 final _homeTabNavigatorKey = GlobalKey<NavigatorState>();
@@ -102,47 +103,3 @@ final router = GoRouter(
     ),
   ],
 );
-
-class BottomNavigationPage extends StatefulWidget {
-  const BottomNavigationPage({
-    super.key,
-    required this.child,
-  });
-
-  final StatefulNavigationShell child;
-
-  @override
-  State<BottomNavigationPage> createState() => _BottomNavigationPageState();
-}
-
-class _BottomNavigationPageState extends State<BottomNavigationPage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: widget.child,
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        currentIndex: widget.child.currentIndex,
-        onTap: (index) {
-          widget.child.goBranch(
-            index,
-            initialLocation: index == widget.child.currentIndex,
-          );
-          setState(() {});
-        },
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile',
-          ),
-        ],
-      ),
-    );
-  }
-}
